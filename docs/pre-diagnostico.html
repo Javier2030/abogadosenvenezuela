@@ -1,7 +1,7 @@
 <!doctype html><html lang="es"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="index,follow,max-image-preview:large">
-<title>Pre-diagnóstico Legal Gratis | Abogados en Venezuela — Abogados Venezuela</title>
+<title>Pre-diagnóstico Legal Gratis | Abogados en Venezuela</title>
 <meta name="description" content="Asistente legal interactivo: responde unas preguntas y recibe al instante viabilidad, tiempos, base legal, documentos y pasos de tu trámite en Venezuela. Gratis y sin compromiso.">
 <link rel="canonical" href="https://abogadosenvenezuela.com/pre-diagnostico.html">
 <meta name="theme-color" content="#0e2440">
@@ -76,7 +76,7 @@ footer{background:var(--navy2);color:#c7d2e0;text-align:center;padding:26px 20px
   <div class="box" id="app"></div>
   <div id="res"></div>
 </div>
-<footer>⚖️ Abogados en Venezuela · Abogados en Venezuela 100% online · <a href="./">Inicio</a><br>
+<footer>⚖️ Abogados en Venezuela · Asesoría legal 100% online · <a href="./">Inicio</a><br>
 <span style="font-size:11.5px;color:#7c889a">Herramienta orientativa. No constituye asesoría legal ni garantía. La Abg. Adelaida Victoria Mata de Pérez estudia cada caso.</span></footer>
 
 <script>
@@ -415,7 +415,7 @@ function resultado(){var p=S.proc,nv=nivel();
    '<button class="btn ghost noprint" onclick="reinicio()">↺ Evaluar otro caso</button></div></div>';
  if(S.altern&&S.altern.length)h+='<div class="alt noprint">¿No era esto? Quizá: '+S.altern.map(function(a){return '<a onclick="start(byId(\''+a.id+'\'))">'+a.nom+'</a>';}).join(" · ")+'</div>';
  h+='<div class="disc">⚖️ <b>Importante:</b> esta es una orientación automatizada, <b>no es asesoría legal ni garantía de resultado</b>. No damos porcentajes de éxito ni plazos exactos porque cada caso depende de las pruebas, el tribunal y la contraparte. La <b>Abg. Adelaida Victoria Mata de Pérez</b> (INPREABOGADO 187.536) estudia personalmente tu caso antes de cualquier actuación.</div>';
- app.innerHTML='<div class="qtitle">✅ Tu pre-diagnóstico está listo</div><div class="qhelp">Guárdalo, imprímelo o envíaselo a la abogada con un toque — ya va con el resumen de tus respuestas.</div><div class="nav"><button class="btn ghost" onclick="S.qi=Math.max(0,S.proc.preg.length-1);S.resp.pop();preg()">← Atrás</button>'+dots(3,4)+'<span></span></div>';
+ app.innerHTML='<div class="qtitle">✅ Tu pre-diagnóstico está listo</div><div class="qhelp">Guárdalo, imprímelo o envíaselo a la abogada con un toque — ya va con el resumen de tus respuestas.</div><div class="nav"><button class="btn ghost" onclick="S.qi=Math.max(0,S.proc.preg.length-1);var _r=S.resp.pop();if(_r){S.score-=_r.v;S.notas.pop();}preg()">← Atrás</button>'+dots(3,4)+'<span></span></div>';
  res.innerHTML=h;res.style.display="block";ckUpd();res.scrollIntoView({behavior:"smooth"});}
 function derivaCard(tit,txt,wa){app.innerHTML='<div class="qtitle">'+tit+'</div><div class="qhelp">'+txt+'</div>'+
  '<div class="actions"><a class="btn wa" target="_blank" rel="noopener" href="https://wa.me/'+WA+'?text='+encodeURIComponent(wa)+'">💬 Hablar con la abogada ahora</a>'+

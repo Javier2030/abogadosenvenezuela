@@ -1,7 +1,7 @@
 <!doctype html><html lang="es"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="index,follow,max-image-preview:large">
-<title>Cotiza tu trámite legal | Abogados en Venezuela — Abogados Venezuela</title>
+<title>Cotiza tu trámite legal | Abogados en Venezuela</title>
 <meta name="description" content="Calcula cuánto te cuesta tu trámite legal en Venezuela: divorcio, poder, sucesión, empresa y más. Precio claro al instante, en dólares. 100% online.">
 <link rel="canonical" href="https://abogadosenvenezuela.com/cotizador.html">
 <meta name="theme-color" content="#0e2440">
@@ -61,7 +61,7 @@ footer{background:var(--navy2);color:#c7d2e0;text-align:center;padding:26px 20px
     </div>
   </div>
 </div>
-<footer>⚖️ Abogados en Venezuela · Abogados en Venezuela 100% online · <a href="./">Inicio</a></footer>
+<footer>⚖️ Abogados en Venezuela · Asesoría legal 100% online · <a href="./">Inicio</a></footer>
 <script>
 var WA="584164038365";
 // precio = tarifa estándar del bufete (USD), competitiva y rentable; off = con -10%
@@ -94,12 +94,14 @@ function cotizar(){
   var badge=res.querySelector(".badge");
   if(s.p===0){ // gratis o cuota litis
     badge.style.display="none";
+    document.querySelector(".pnorm").style.display="none";
     document.getElementById("pn").textContent="";
-    document.getElementById("po").innerHTML=(s.nota||"Consúltanos");
-    document.getElementById("po").style.fontSize="22px";
-    document.getElementById("ahorro").textContent="";
+    document.getElementById("po").innerHTML=(s.nota&&/litis/i.test(s.nota))?'Sin honorarios por adelantado':'GRATIS';
+    document.getElementById("po").style.fontSize="30px";
+    document.getElementById("ahorro").textContent=(s.nota&&/litis/i.test(s.nota))?'Cobramos 20% solo de lo que recuperemos para ti. Si no cobras, no pagas.':(s.nota||'');
     document.querySelector(".offer").style.display="none";
   }else{
+    document.querySelector(".pnorm").style.display="block";
     badge.style.display="inline-block";
     document.querySelector(".offer").style.display="block";
     document.getElementById("po").style.fontSize="44px";
@@ -110,6 +112,7 @@ function cotizar(){
   }
   document.getElementById("tl").textContent=s.t;
   var msg="Hola, vi el cotizador y quiero *"+s.n+"*"+(s.p?" ("+fmt(Math.round(s.p*0.9))+" con la oferta del mes)":"")+". Quiero empezar.";
+  document.getElementById("cta").innerHTML=s.p?"💬 Empezar con este precio por WhatsApp":"💬 Consultar mi caso por WhatsApp";
   document.getElementById("cta").href="https://wa.me/"+WA+"?text="+encodeURIComponent(msg);
   res.style.display="block";res.scrollIntoView({behavior:"smooth",block:"center"});
 }
