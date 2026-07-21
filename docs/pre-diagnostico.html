@@ -88,10 +88,10 @@ var KB=[
  kw:["sucesion","sucesoral","herencia","heredar","heredero","fallecio","murio","muerte de","difunto","causante","seniat","bienes del fallecido","papa fallecio","mama fallecio","dejo una casa","dejo bienes"],
  t:"1 a 3 meses (más si hay muchos bienes o inmuebles que registrar)",
  dep:"reunir partidas y documentos de propiedad, tiempos del SENIAT y número de herederos",
- legal:"Ley de Impuesto sobre Sucesiones, Donaciones y demás Ramos Conexos (declaración dentro de los 180 días hábiles siguientes al fallecimiento) y Código Civil (orden de suceder, arts. 807 y siguientes).",
+ legal:"Ley de Impuesto sobre Sucesiones, Donaciones y demás Ramos Conexos (declaración dentro de los 180 días hábiles siguientes al fallecimiento) y Código Civil (orden de suceder, arts. 822 y siguientes).",
  hon:"Referencia del tabulador: porcentaje del líquido hereditario (escala 6% → 2% según el monto). Gestión completa de casos estándar: desde $800. Cotización exacta tras ver los recaudos.",
  docs:["Acta de defunción","Partidas que prueben el parentesco (nacimiento / matrimonio)","Documentos de propiedad de los bienes (inmuebles, vehículos, cuentas)","Cédulas de los herederos","RIF sucesoral"],
- pasos:["Reunimos y verificamos los recaudos","Elaboramos la declaración (Forma 32 del SENIAT)","Presentamos ante el SENIAT y obtenemos el certificado de solvencia","Registramos los bienes a nombre de los herederos"],
+ pasos:["Reunimos y verificamos los recaudos","Elaboramos la declaración sucesoral electrónica en el portal del SENIAT (antigua Forma 32)","Presentamos ante el SENIAT y obtenemos el certificado de solvencia","Registramos los bienes a nombre de los herederos"],
  preg:[
   {q:"¿El fallecimiento ocurrió hace menos de 9 meses?",h:"El plazo legal para declarar es de 180 días hábiles (unos 9 meses corridos).",
    si:{v:2,n:"Estás dentro del plazo legal: se declara sin recargos."},no:{v:-1,n:"Fuera de plazo hay multas y recargos del SENIAT. No impide el trámite, pero conviene declarar cuanto antes para frenar los intereses."},ns:{v:0,n:"Verificaremos la fecha exacta con el acta de defunción."}},
@@ -106,7 +106,7 @@ var KB=[
  legal:"Artículo 185-A del Código Civil. Si hay niños o adolescentes, interviene el Tribunal de Protección (LOPNNA).",
  hon:"Referencia: honorario fijo por el procedimiento + 5% si hay partición de bienes. Registro de la sentencia: ~$160. Cotización exacta según el caso.",
  docs:["Acta de matrimonio (copia certificada reciente)","Cédulas de ambos cónyuges","Partidas de nacimiento de hijos, si los hay","Acuerdo sobre custodia / manutención / bienes, si aplica"],
- pasos:["Estudiamos el caso y verificamos recaudos","Redactamos la solicitud de mutuo acuerdo","La consignamos ante el tribunal competente","Si hay menores, interviene el Ministerio Público","Sentencia y ejecutoria — quedas legalmente divorciado(a)"],
+ pasos:["Estudiamos el caso y verificamos recaudos","Redactamos la solicitud de mutuo acuerdo","La consignamos ante el tribunal competente","El tribunal notifica al Fiscal del Ministerio Público (lo ordena el art. 185-A); con niños o adolescentes conoce el Tribunal de Protección (LOPNNA)","Sentencia y ejecutoria — quedas legalmente divorciado(a)"],
  preg:[
   {q:"¿Ambos cónyuges están de acuerdo en divorciarse?",
    si:{v:2,n:"Acuerdo mutuo → procede el 185-A, la vía más rápida y económica."},no:{v:-2,n:"Sin acuerdo, la vía correcta es el divorcio por desafecto (unilateral): también procede aunque el otro no quiera, solo toma más tiempo.",go:"divorciodesafecto"},ns:{v:0,n:"Si el otro cónyuge no coopera, existe la vía unilateral por desafecto — el divorcio procede igual."}},
@@ -141,7 +141,7 @@ var KB=[
   {q:"¿Tienes cédula venezolana o pasaporte a la mano?",
    si:{v:2,n:"Con identificación disponible, el poder se firma en la primera cita."},no:{v:-1,n:"Sin documento venezolano a mano se evalúan alternativas (pasaporte vencido, datos filiatorios). Te orientamos según tu país."},ns:{v:0,n:""}},
   {q:"¿Sabes ya para qué necesitas el poder (venta, herencia, divorcio, banco…)?",
-   si:{v:1,n:"Con la finalidad clara, redactamos las facultades exactas — un poder bien redactado no lo rechaza ningún registro ni banco."},no:{v:0,n:"Te ayudamos a definir las facultades: es la parte más delicada (un poder incompleto se rechaza; uno excesivo es riesgoso)."},ns:{v:0,n:""}},
+   si:{v:1,n:"Con la finalidad clara, redactamos las facultades exactas — un poder bien redactado minimiza al máximo el riesgo de rechazo en registros y bancos."},no:{v:0,n:"Te ayudamos a definir las facultades: es la parte más delicada (un poder incompleto se rechaza; uno excesivo es riesgoso)."},ns:{v:0,n:""}},
   {q:"¿Hay consulado de Venezuela operativo cerca de ti?",
    si:{v:1,n:"Firmar en el consulado evita la apostilla: menos pasos."},no:{v:0,n:"Sin consulado cerca, se firma ante un notario local y se apostilla — funciona exactamente igual en Venezuela."},ns:{v:0,n:"Verificamos por ti si tu país tiene consulado venezolano operativo o si conviene la vía notario + apostilla."}}]},
 
@@ -177,7 +177,7 @@ var KB=[
  t:"Reclamo/negociación: 1 a 3 meses. Si va a juicio: 6 a 18+ meses",
  dep:"si el patrono paga en negociación o hay que demandar, la carga de los tribunales laborales y las pruebas disponibles",
  legal:"LOTTT: prestaciones sociales (arts. 141 y siguientes); prescripción de 10 años para prestaciones y 5 años para las demás acciones laborales (art. 51).",
- hon:"Usual en la práctica: cuota litis (porcentaje de lo efectivamente recuperado) — solo cobramos si tú cobras. Alternativa: honorario fijo por etapa.",
+ hon:"Usual en la práctica: cuota litis (porcentaje de lo efectivamente recuperado) — solo cobramos honorarios si tú cobras (los gastos y aranceles del proceso se acuerdan por separado). Alternativa: honorario fijo por etapa.",
  docs:["Contrato o recibos de pago","Constancia de trabajo","Fechas de ingreso / egreso y último salario","Cualquier prueba de la relación laboral (mensajes, credencial, testigos)"],
  pasos:["Calculamos todo lo que te deben (prestaciones, utilidades, vacaciones, intereses)","Reclamamos y negociamos con el patrono","Si no paga: demanda ante el tribunal laboral","Audiencias y sentencia / acuerdo de pago"],
  preg:[
@@ -236,7 +236,7 @@ var KB=[
  legal:"LOPNNA, arts. 391 a 393 (autorizaciones para viajar). Si un progenitor se niega o no aparece, decide el Tribunal de Protección (art. 393).",
  hon:"Referencia: redacción + guía de firma ~$45–100. Si requiere autorización judicial (padre que se niega): cotización aparte.",
  docs:["Partida de nacimiento y cédula/pasaporte del menor","Cédulas de los padres","Datos del acompañante, destino y fechas del viaje"],
- pasos:["Redactamos la autorización conforme a la LOPNNA","Firma ante notario o consulado (según dónde esté el padre que autoriza)","Apostilla / legalización si se firmó en el exterior","Se presenta en migración — el menor viaja sin contratiempos"],
+ pasos:["Redactamos la autorización conforme a la LOPNNA","Firma ante notario o consulado (según dónde esté el padre que autoriza)","Apostilla / legalización si se firmó en el exterior","Se presenta en migración — autorización lista para el viaje"],
  preg:[
   {q:"¿Ambos padres están de acuerdo y disponibles para firmar?",
    si:{v:2,n:"Con ambos padres firmando, es un trámite de días."},no:{v:-2,n:"Si un padre se niega o no aparece, se pide autorización JUDICIAL al Tribunal de Protección (art. 393 LOPNNA): procede, pero toma más tiempo y requiere justificar el interés del menor."},ns:{v:0,n:"Si no ubicas al otro progenitor, existe la vía judicial; documentaremos los intentos de contacto."}},
@@ -294,7 +294,7 @@ var KB=[
  legal:"Código Civil (venta, arts. 1.474 y siguientes) y protocolización ante el Registro Público. Vendedor en el exterior: firma mediante poder apostillado.",
  hon:"Referencia del tabulador: escala/porcentaje según el valor de la operación. Gestión integral vendedor-en-exterior: cotización fija por encargo.",
  docs:["Documento de propiedad registrado","Cédula catastral y solvencias (municipio, agua, condominio si aplica)","RIF y cédulas de las partes","Poder apostillado si el dueño está fuera"],
- pasos:["Revisamos el título y el estado del inmueble (¡antes de comprometer nada!)","Redactamos opción a compra y/o venta definitiva","Gestionamos solvencias y recaudos municipales","Firma y protocolización en el Registro — traspaso seguro del dinero y la propiedad"],
+ pasos:["Revisamos el título y el estado del inmueble (¡antes de comprometer nada!)","Redactamos opción a compra y/o venta definitiva","Gestionamos solvencias y recaudos municipales","Firma y protocolización en el Registro — estructura de pago y traspaso diseñada para proteger a ambas partes"],
  preg:[
   {q:"¿El inmueble tiene su documento de propiedad registrado y en regla?",
    si:{v:2,n:"Título limpio y registrado: la venta puede estructurarse de inmediato."},no:{v:-2,n:"Sin título en regla (sucesión sin declarar, bienhechurías, documento no registrado), primero se sanea la propiedad — te decimos exactamente qué falta y cuánto toma."},ns:{v:0,n:"Auditamos el título ANTES: es lo que evita estafas y ventas que el Registro rechaza."}},

@@ -48,7 +48,7 @@ footer{background:var(--navy2);color:#c7d2e0;text-align:center;padding:26px 20px
       <option value="">— Elige tu trámite —</option>
     </select>
     <div id="res">
-      <div class="badge">🔥 OFERTA DEL MES · −10%</div>
+      <div class="badge">TARIFA PREFERENCIAL · −10%</div>
       <div class="price">
         <div class="pnorm">Precio normal: <s id="pn"></s></div>
         <div class="poff" id="po"></div>
@@ -111,7 +111,7 @@ function cotizar(){
     document.getElementById("ahorro").textContent="Ahorras $"+(s.p-off)+" si empiezas en 3 días";
   }
   document.getElementById("tl").textContent=s.t;
-  var msg="Hola, vi el cotizador y quiero *"+s.n+"*"+(s.p?" ("+fmt(Math.round(s.p*0.9))+" con la oferta del mes)":"")+". Quiero empezar.";
+  var msg="Hola, vi el cotizador y quiero *"+s.n+"*"+(s.p?" ("+fmt(Math.round(s.p*0.9))+" con la tarifa preferencial)":"")+". Quiero empezar.";
   document.getElementById("cta").innerHTML=s.p?"💬 Empezar con este precio por WhatsApp":"💬 Consultar mi caso por WhatsApp";
   document.getElementById("cta").href="https://wa.me/"+WA+"?text="+encodeURIComponent(msg);
   res.style.display="block";res.scrollIntoView({behavior:"smooth",block:"center"});
