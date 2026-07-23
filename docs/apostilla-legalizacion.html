@@ -42,6 +42,12 @@ footer{background:var(--navy2);color:#c7d2e0;text-align:center;padding:36px 20px
 .credbox img{max-width:100%;height:auto;border-radius:12px;border:1px solid var(--line);background:#fff}
 .credseal{flex:0 0 auto;width:108px;height:108px;border-radius:50%;display:grid;place-items:center;font-size:46px;background:#eef1f5;border:3px dashed #1a3a8c;color:#1a3a8c}
 .antifraude{margin-top:14px;padding:12px 14px;border-left:4px solid #b3261e;background:#fff4f3;border-radius:8px;font-size:14px;color:#5c2b27}
+.verifbox{margin-top:16px;padding:16px;background:#f7f9fc;border:1px solid var(--line);border-radius:12px;font-size:14.5px}
+.verifrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+.verifrow input{flex:1 1 220px;font:inherit;padding:11px 13px;border:1px solid var(--line);border-radius:10px;background:#fff}
+.verifrow .btn{flex:0 0 auto}
+.verifout{margin-top:10px;font-weight:700;min-height:1.2em}
+.verifout.ok{color:#12633f}.verifout.bad{color:#b3261e}
 .credbox ul{margin:10px 0 0;padding-left:20px;color:var(--muted);font-size:14.5px}.credbox li{margin-bottom:6px}
 .credbox a{color:var(--gold2);font-weight:700}
 .geolist{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px;list-style:none;padding:0;margin:14px 0}
@@ -100,10 +106,45 @@ footer{background:var(--navy2);color:#c7d2e0;text-align:center;padding:36px 20px
     <p><b>Abg. Adelaida Mata</b><br>Abogada colegiada · inscrita en el <b>INPREABOGADO</b> (nº 187.5XX)</p>
     <ul>
       <li><b>Te damos el número completo al escribirnos</b>, junto con el nombre tal como consta en el registro, para que lo verifiques <i>antes</i> de contratar y antes de pagar nada.</li>
-      <li>Compruébalo tú mismo en el registro público del INPREABOGADO del <a href="https://www.saren.gob.ve/app/consultainpre/index.php" rel="nofollow noopener" target="_blank">SAREN</a>. Si el portal está caído, el Colegio de Abogados también verifica por teléfono.</li>
-      <li>No publicamos el número completo en abierto a propósito: es la pieza que buscan quienes se hacen pasar por abogados. Verificar es tu derecho y te lo damos en cuanto lo pidas.</li>
+      <li>Confírmalo en el <a href="https://inpreabogado.com.ve/" rel="nofollow noopener" target="_blank">INPREABOGADO</a> (Av. La Salle, Torre Inpreabogado, pisos 12 y 13, Los Caobos, Caracas; lunes a viernes, 9:00 a 14:30) o escribiéndoles a <a href="mailto:inpreabogado1@gmail.com">inpreabogado1@gmail.com</a>. El Colegio de Abogados del estado también verifica.</li>
+      <li>No publicamos el número en abierto a propósito: es la pieza que buscan quienes se hacen pasar por abogados. Verificar es tu derecho y te lo damos en cuanto lo pidas.</li>
       <li>Pide siempre el INPREABOGADO a cualquier abogado antes de pagarle. Es tu mejor defensa contra estafas.</li>
     </ul>
+    
+<div class="verifbox">
+  <p><b>¿Recibiste un documento a nombre de la Abg. Adelaida Mata?</b>
+  Escribe aquí el número de INPREABOGADO que aparece en él y te confirmamos si es el correcto.
+  Esta web no publica el número: solo comprueba el que tú ya tienes.</p>
+  <div class="verifrow">
+    <input id="vinpre" type="text" inputmode="numeric" autocomplete="off"
+           placeholder="Número que figura en tu documento" aria-label="Número de INPREABOGADO a verificar">
+    <button id="vbtn" type="button" class="btn">Comprobar</button>
+  </div>
+  <p id="vout" class="verifout" role="status" aria-live="polite"></p>
+</div>
+<script>
+(function(){
+  var S="o65LskAlZ130Qlb2WW5JCA==",H="crs/jCR9UNvIcnh5JikJ2gleMuHOLb5A0tbo3FnFEwY=",IT=600000;
+  function b2a(b){return btoa(String.fromCharCode.apply(null,new Uint8Array(b)))}
+  function a2b(s){var r=atob(s),u=new Uint8Array(r.length);for(var i=0;i<r.length;i++)u[i]=r.charCodeAt(i);return u}
+  var btn=document.getElementById("vbtn"),inp=document.getElementById("vinpre"),out=document.getElementById("vout");
+  if(!btn) return;
+  btn.addEventListener("click",async function(){
+    var n=(inp.value||"").replace(/\D/g,"");
+    if(!n){out.className="verifout";out.textContent="Escribe el número que aparece en tu documento.";return}
+    if(!(window.crypto&&crypto.subtle)){out.className="verifout";out.textContent="Tu navegador no permite la comprobación. Escríbenos y lo verificamos contigo.";return}
+    out.className="verifout";out.textContent="Comprobando…";btn.disabled=true;
+    try{
+      var k=await crypto.subtle.importKey("raw",new TextEncoder().encode(n),{name:"PBKDF2"},false,["deriveBits"]);
+      var d=await crypto.subtle.deriveBits({name:"PBKDF2",salt:a2b(S),iterations:IT,hash:"SHA-256"},k,256);
+      if(b2a(d)===H){out.className="verifout ok";out.textContent="✓ Coincide. Ese número corresponde a la credencial de la Abg. Adelaida Mata. Aun así, confírmalo con el INPREABOGADO por sus canales oficiales antes de pagar.";}
+      else{out.className="verifout bad";out.textContent="✗ No coincide. Ese número NO corresponde a nuestra credencial. No pagues ni entregues documentos: escríbenos de inmediato por el WhatsApp de esta web.";}
+    }catch(e){out.className="verifout";out.textContent="No se pudo comprobar. Escríbenos y lo verificamos contigo.";}
+    btn.disabled=false;
+  });
+  inp&&inp.addEventListener("keydown",function(e){if(e.key==="Enter"){e.preventDefault();btn.click()}});
+})();
+</script>
     <p class="antifraude"><b>Aviso de seguridad.</b> No publicamos ni entregamos imágenes del sello profesional:
     un sello es falsificable y por sí solo no prueba nada. Todo documento que emitimos se valida
     <b>contactándonos por los canales oficiales de esta web</b> ((+58) 416-4038365 y contacto@abogadosenvenezuela.com).
@@ -123,7 +164,7 @@ footer{background:var(--navy2);color:#c7d2e0;text-align:center;padding:36px 20px
 <p class="disc">La información de este sitio es de carácter general y no constituye asesoría legal para un caso concreto. La relación abogado-cliente inicia con la contratación formal. © 2026 Abogados en Venezuela.</p></footer>
 <a class="fixwa" href="https://wa.me/584164038365?text=Hola" aria-label="WhatsApp">💬</a>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","serviceType":"apostilla y legalización de documentos Venezuela","url":"https://abogadosenvenezuela.com/apostilla-legalizacion.html","provider":{"@type":"LegalService","name":"Abogados en Venezuela","telephone":"(+58) 416-4038365","url":"https://abogadosenvenezuela.com/","areaServed":{"@type":"Country","name":"Venezuela"}},"areaServed":{"@type":"Country","name":"Venezuela"},"description":"Apostillado y legalización de partidas, títulos, antecedentes y documentos venezolanos para usarlos en el exterior. Gestión a distancia. Consulta por WhatsApp."}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","@id":"https://abogadosenvenezuela.com/#abogada","name":"Abg. Adelaida Mata","honorificPrefix":"Abg.","jobTitle":"Abogada","nationality":{"@type":"Country","name":"Venezuela"},"knowsLanguage":"es","url":"https://abogadosenvenezuela.com/sobre-nosotros.html","image":"https://abogadosenvenezuela.com/img/abg-adelaida-mata.jpg","telephone":"(+58) 416-4038365","email":"contacto@abogadosenvenezuela.com","hasCredential":{"@type":"EducationalOccupationalCredential","@id":"https://abogadosenvenezuela.com/#inpre","name":"Inscripción en el INPREABOGADO","credentialCategory":"Colegiatura profesional","recognizedBy":{"@type":"Organization","name":"Instituto de Previsión Social del Abogado (INPREABOGADO)","url":"https://www.saren.gob.ve/app/consultainpre/index.php"}},"worksFor":{"@id":"https://abogadosenvenezuela.com/#bufete"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","@id":"https://abogadosenvenezuela.com/#abogada","name":"Abg. Adelaida Mata","honorificPrefix":"Abg.","jobTitle":"Abogada","nationality":{"@type":"Country","name":"Venezuela"},"knowsLanguage":"es","url":"https://abogadosenvenezuela.com/sobre-nosotros.html","image":"https://abogadosenvenezuela.com/img/abg-adelaida-mata.jpg","telephone":"(+58) 416-4038365","email":"contacto@abogadosenvenezuela.com","hasCredential":{"@type":"EducationalOccupationalCredential","@id":"https://abogadosenvenezuela.com/#inpre","name":"Inscripción en el INPREABOGADO","credentialCategory":"Colegiatura profesional","recognizedBy":{"@type":"Organization","name":"Instituto de Previsión Social del Abogado (INPREABOGADO)","url":"https://inpreabogado.com.ve/"}},"worksFor":{"@id":"https://abogadosenvenezuela.com/#bufete"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Offer","name":"apostilla y legalización de documentos Venezuela","priceCurrency":"USD","price":"120","availability":"https://schema.org/InStock","url":"https://abogadosenvenezuela.com/apostilla-legalizacion.html","seller":{"@type":"LegalService","name":"Abogados en Venezuela"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://abogadosenvenezuela.com/"},{"@type":"ListItem","position":2,"name":"Apostilla y legalización de documentos venezuela","item":"https://abogadosenvenezuela.com/apostilla-legalizacion.html"}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"¿La apostilla venezolana sirve en cualquier país?","acceptedAnswer":{"@type":"Answer","text":"La apostilla es válida en los países del Convenio de La Haya. Para países fuera del Convenio se hace legalización por vía consular; te indicamos cuál aplica a tu caso."}},{"@type":"Question","name":"¿Necesito el documento original?","acceptedAnswer":{"@type":"Answer","text":"Depende del documento. En muchos casos primero se obtiene una copia certificada reciente. Te decimos exactamente qué se necesita antes de empezar."}},{"@type":"Question","name":"¿Pueden apostillar si estoy fuera del país?","acceptedAnswer":{"@type":"Answer","text":"Sí, es justamente lo que más hacemos. Gestionamos todo aquí y te enviamos el documento apostillado."}}]}</script>
