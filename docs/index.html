@@ -48,10 +48,8 @@ footer{background:var(--navy2);color:#c7d2e0;text-align:center;padding:36px 20px
 .antifraude{margin-top:14px;padding:12px 14px;border-left:4px solid #b3261e;background:#fff4f3;border-radius:8px;font-size:14px;color:#5c2b27}
 .verifbox{margin-top:16px;padding:16px;background:#f7f9fc;border:1px solid var(--line);border-radius:12px;font-size:14.5px}
 .verifrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
-.verifrow input{flex:1 1 220px;font:inherit;padding:11px 13px;border:1px solid var(--line);border-radius:10px;background:#fff}
 .verifrow .btn{flex:0 0 auto}
-.verifout{margin-top:10px;font-weight:700;min-height:1.2em}
-.verifout.ok{color:#12633f}.verifout.bad{color:#b3261e}
+.verifnota{margin-top:10px;font-size:13.5px;color:var(--muted)}
 .credbox ul{margin:10px 0 0;padding-left:20px;color:var(--muted);font-size:14.5px}.credbox li{margin-bottom:6px}
 .credbox a{color:var(--gold2);font-weight:700}
 .geolist{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px;list-style:none;padding:0;margin:14px 0}
@@ -158,38 +156,20 @@ footer{background:var(--navy2);color:#c7d2e0;text-align:center;padding:36px 20px
     
 <div class="verifbox">
   <p><b>¿Recibiste un documento a nombre de la Abg. Adelaida Mata?</b>
-  Escribe aquí el número de INPREABOGADO que aparece en él y te confirmamos si es el correcto.
-  Esta web no publica el número: solo comprueba el que tú ya tienes.</p>
+  Comprueba con nosotros si el número de INPREABOGADO que aparece en él es el correcto.
+  Respondemos en minutos y no cuesta nada.</p>
+  <p class="verifnota">Este sitio no publica el número —ni siquiera cifrado— precisamente
+  para que nadie pueda extraerlo de aquí y usarlo en documentos falsos. Te lo confirmamos
+  directamente a ti por un canal donde hay una persona respondiendo.</p>
   <div class="verifrow">
-    <input id="vinpre" type="text" inputmode="numeric" autocomplete="off"
-           placeholder="Número que figura en tu documento" aria-label="Número de INPREABOGADO a verificar">
-    <button id="vbtn" type="button" class="btn">Comprobar</button>
+    <a class="btn wa" href="https://wa.me/584164038365?text=Hola, recibi un documento a nombre de la Abg. Adelaida Mata con el numero de INPREABOGADO ____ . Quiero confirmar si es el correcto antes de continuar.">Verificar por WhatsApp</a>
+    <a class="btn" href="mailto:contacto@abogadosenvenezuela.com?subject=Verificar%20credencial&body=Recibi%20un%20documento%20con%20el%20numero%20de%20INPREABOGADO%20____%20a%20nombre%20de%20la%20Abg.%20Adelaida%20Mata.%20Quiero%20confirmar%20si%20es%20el%20correcto.">Verificar por correo</a>
   </div>
-  <p id="vout" class="verifout" role="status" aria-live="polite"></p>
+  <p class="verifnota">También puedes confirmarlo de forma independiente en el
+  <a href="https://inpreabogado.com.ve/" rel="nofollow noopener" target="_blank">INPREABOGADO</a>
+  (Av. La Salle, Torre Inpreabogado, pisos 12 y 13, Los Caobos, Caracas; lunes a viernes, 9:00 a 14:30, <a href="mailto:inpreabogado1@gmail.com">inpreabogado1@gmail.com</a>)
+  o en el Colegio de Abogados de tu estado.</p>
 </div>
-<script>
-(function(){
-  var S="o65LskAlZ130Qlb2WW5JCA==",H="crs/jCR9UNvIcnh5JikJ2gleMuHOLb5A0tbo3FnFEwY=",IT=600000;
-  function b2a(b){return btoa(String.fromCharCode.apply(null,new Uint8Array(b)))}
-  function a2b(s){var r=atob(s),u=new Uint8Array(r.length);for(var i=0;i<r.length;i++)u[i]=r.charCodeAt(i);return u}
-  var btn=document.getElementById("vbtn"),inp=document.getElementById("vinpre"),out=document.getElementById("vout");
-  if(!btn) return;
-  btn.addEventListener("click",async function(){
-    var n=(inp.value||"").replace(/\D/g,"");
-    if(!n){out.className="verifout";out.textContent="Escribe el número que aparece en tu documento.";return}
-    if(!(window.crypto&&crypto.subtle)){out.className="verifout";out.textContent="Tu navegador no permite la comprobación. Escríbenos y lo verificamos contigo.";return}
-    out.className="verifout";out.textContent="Comprobando…";btn.disabled=true;
-    try{
-      var k=await crypto.subtle.importKey("raw",new TextEncoder().encode(n),{name:"PBKDF2"},false,["deriveBits"]);
-      var d=await crypto.subtle.deriveBits({name:"PBKDF2",salt:a2b(S),iterations:IT,hash:"SHA-256"},k,256);
-      if(b2a(d)===H){out.className="verifout ok";out.textContent="✓ Coincide. Ese número corresponde a la credencial de la Abg. Adelaida Mata. Aun así, confírmalo con el INPREABOGADO por sus canales oficiales antes de pagar.";}
-      else{out.className="verifout bad";out.textContent="✗ No coincide. Ese número NO corresponde a nuestra credencial. No pagues ni entregues documentos: escríbenos de inmediato por el WhatsApp de esta web.";}
-    }catch(e){out.className="verifout";out.textContent="No se pudo comprobar. Escríbenos y lo verificamos contigo.";}
-    btn.disabled=false;
-  });
-  inp&&inp.addEventListener("keydown",function(e){if(e.key==="Enter"){e.preventDefault();btn.click()}});
-})();
-</script>
     <p class="antifraude"><b>Aviso de seguridad.</b> No publicamos ni entregamos imágenes del sello profesional:
     un sello es falsificable y por sí solo no prueba nada. Todo documento que emitimos se valida
     <b>contactándonos por los canales oficiales de esta web</b> ((+58) 416-4038365 y contacto@abogadosenvenezuela.com).
