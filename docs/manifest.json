@@ -1,0 +1,16 @@
+{
+  "name": "Abg. Adelaida Mata — Abogados Venezuela",
+  "short_name": "Abg. A. Mata",
+  "description": "Asesoría legal 100% online en Venezuela: poderes, apostillas, divorcios, sucesiones, empresas y contratos.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#0e2440",
+  "theme_color": "#0e2440",
+  "lang": "es",
+  "icons": [
+    {"src": "icon-192.png", "sizes": "192x192", "type": "image/png"},
+    {"src": "icon-512.png", "sizes": "512x512", "type": "image/png"},
+    {"src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable"}
+  ]
+}
