@@ -1,8 +1,9 @@
 /* Banner de instalación PWA — Abg. Adelaida Mata */
 (function(){var BRAND="Abg. Adelaida Mata";var ICON="icon-192.png";
-try{if(matchMedia("(display-mode: standalone)").matches||navigator.standalone)return;if(localStorage.getItem("pwaHide"))return;}catch(e){}
+document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest('a[href*="wa.me"]');if(a){try{localStorage.setItem("waClick","1");}catch(x){}}},true);
+try{if(matchMedia("(display-mode: standalone)").matches||navigator.standalone)return;if(localStorage.getItem("pwaHide"))return;if(!localStorage.getItem("waClick"))return;}catch(e){}
 function banner(inner){var b=document.createElement("div");b.id="pwaB";
-b.style.cssText="position:fixed;left:12px;right:12px;bottom:12px;z-index:99999;background:linear-gradient(135deg,#0e2440,#081627);color:#fff;border:1px solid rgba(201,162,75,.55);border-radius:16px;padding:12px 14px;display:flex;align-items:center;gap:11px;box-shadow:0 16px 44px -12px rgba(0,0,0,.75);font-family:system-ui,-apple-system,sans-serif;max-width:460px;margin:0 auto";
+b.style.cssText="position:fixed;left:12px;right:12px;bottom:88px;z-index:99999;background:linear-gradient(135deg,#0e2440,#081627);color:#fff;border:1px solid rgba(201,162,75,.55);border-radius:16px;padding:12px 14px;display:flex;align-items:center;gap:11px;box-shadow:0 16px 44px -12px rgba(0,0,0,.75);font-family:system-ui,-apple-system,sans-serif;max-width:460px;margin:0 auto";
 b.innerHTML=inner;document.body.appendChild(b);return b;}
 function close(){var e=document.getElementById("pwaB");if(e)e.remove();try{localStorage.setItem("pwaHide","1");}catch(x){}}
 var iOS=/iphone|ipad|ipod/i.test(navigator.userAgent);var deferred=null;
