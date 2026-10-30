@@ -259,6 +259,8 @@ var MotorPS = (function () {
   function calcular(p) {
     var ini = parse(p.ingreso), fin = parse(p.egreso);
     if (!ini || !fin) return { error: "Indica las dos fechas." };
+    // 30-oct-2026: un año de 2 cifras (p. ej. «14») llegaba como el año 0014 y daba «ley vieja»
+    if (ini.y < 1950 || fin.y < 1950) return { error: "Escribe el año completo, con 4 cifras (por ejemplo, 2014)." };
     if (antes(fin, ini)) return { error: "La fecha de salida es anterior a la de ingreso." };
     var s1 = +p.salario || 0;
     if (s1 <= 0) return { error: "Indica tu salario mensual." };
@@ -343,6 +345,7 @@ if (typeof module !== "undefined") module.exports = MotorPS;
   var h = new Date();
   var HOY = h.getFullYear() + "-" + ("0" + (h.getMonth() + 1)).slice(-2) + "-" + ("0" + h.getDate()).slice(-2);
   $("ps-ingreso").max = HOY; $("ps-egreso").max = HOY; $("ps-divisas").max = HOY;
+  $("ps-ingreso").min = $("ps-egreso").min = $("ps-divisas").min = "1950-01-01";
 
   function num(id) { return Math.max(parseFloat($(id).value) || 0, 0); }   // <input type="number">: el navegador ya normaliza el decimal
   function mon() { return $("ps-moneda").value === "Bs" ? "Bs." : "US$"; }
